@@ -1,23 +1,43 @@
 html {
   scroll-snap-type: y mandatory;
   font-family: 'Montserrat', sans-serif;
-  background-color: #000;
+  background-color: #fff;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .app {
-  height: 100vh;
-  background-color: #000;
-  display: grid;
+  margin-top: 50px;
+  background-color: #fff;
   place-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  .app {
+    margin-top: 20px;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .container {
+    margin-bottom: 120px;
+  }
 }
 
 .container {
   position: relative;
   height: 667px;
   width: 375px;
+  display: inline-block;
   border-radius: 25px;
   overflow: scroll;
   scroll-snap-type: y mandatory;
+  background-color: #000;
 }
 
 .container::-webkit-scrollbar {

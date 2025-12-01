@@ -3,12 +3,14 @@ import './App.css';
 import VideoCard from './components/VideoCard';
 import BottomNavbar from './components/BottomNavbar';
 import TopNavbar from './components/TopNavbar';
+import Context from './Context';
+import WellnessBreak from './components/WellnessBreak';
 
 // This array holds information about different videos
 const videoUrls = [
   {
     url: require('./videos/video1.mp4'),
-    profilePic: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9d429ac49d6d18de6ebd2a3fb1f39269~c5_100x100.jpeg?x-expires=1688479200&x-signature=pjH5pwSS8Sg1dJqbB1GdCLXH6ew%3D',
+    profilePic: 'https://content.arjunsur.me/carnival/mole.png',
     username: 'csjackie',
     description: 'Lol nvm #compsci #chatgpt #ai #openai #techtok',
     song: 'Original sound - Famed Flames',
@@ -19,7 +21,7 @@ const videoUrls = [
   },
   {
     url: require('./videos/video2.mp4'),
-    profilePic: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/eace3ee69abac57c39178451800db9d5~c5_100x100.jpeg?x-expires=1688479200&x-signature=wAkVmwL7lej15%2B16ypSWQOqTP8s%3D',
+    profilePic: 'https://content.arjunsur.me/carnival/background.jpg',
     username: 'dailydotdev',
     description: 'Every developer brain @francesco.ciulla #developerjokes #programming #programminghumor #programmingmemes',
     song: 'tarawarolin wants you to know this isnt my sound - Chaplain J Rob',
@@ -30,7 +32,7 @@ const videoUrls = [
   },
   {
     url: require('./videos/video3.mp4'),
-    profilePic: 'https://p77-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4e6698b235eadcd5d989a665704daf68~c5_100x100.jpeg?x-expires=1688479200&x-signature=wkwHDKfNuIDqIVHNm29%2FRf40R3w%3D',
+    profilePic: 'https://content.arjunsur.me/carnival/mole3.png',
     username: 'wojciechtrefon',
     description: '#programming #softwareengineer #vscode #programmerhumor #programmingmemes',
     song: 'help so many people are using my sound - Ezra',
@@ -41,7 +43,7 @@ const videoUrls = [
   },
   {
     url: require('./videos/video4.mp4'),
-    profilePic: 'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4bda52cf3ad31c728153859262c329db~c5_100x100.jpeg?x-expires=1688486400&x-signature=ssUbbCpZFJj6uj33D%2BgtcqxMvgQ%3D',
+    profilePic: 'https://content.arjunsur.me/carnival/mole4.png',
     username: 'faruktutkus',
     description: 'Wait for the end | Im RTX 4090 TI | #softwareengineer #softwareengineer #coding #codinglife #codingmemes ',
     song: 'orijinal ses - Computer Science',
@@ -54,6 +56,11 @@ const videoUrls = [
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [wellnessBreak, setWellnessBreak] = useState(false);
+  const [wellnessActivityIsVideo, setWellnessActivityIsVideo] = useState(true);
+  const [selectedInterval, setSelectedInterval] = useState('10m');
+  const [breakLength, setBreakLength] = useState('2m');
+  const [elapsed, setElapsed] = useState(0);
   const videoRefs = useRef([]);
 
   useEffect(() => {
@@ -98,28 +105,41 @@ function App() {
     videoRefs.current[index] = ref;
   };
 
+  function wellnessBreakFunc() {
+    setWellnessBreak(true);
+  };
+
   return (
     <div className="app">
+      <Context wellnessActivityIsVideoState={wellnessActivityIsVideo} setWellnessActivityIsVideo={setWellnessActivityIsVideo} isWellnessBreak={wellnessBreak} wellnessBreak={wellnessBreakFunc} selectedInterval={selectedInterval} setSelectedInterval={setSelectedInterval} breakLength={breakLength} setBreakLength={setBreakLength} endWellnessBreak={() => setWellnessBreak(false)} />
       <div className="container">
-        <TopNavbar className="top-navbar" />
-        {/* Here we map over the videos array and create VideoCard components */}
-        {videos.map((video, index) => (
-          <VideoCard
-            key={index}
-            username={video.username}
-            description={video.description}
-            song={video.song}
-            likes={video.likes}
-            saves={video.saves}
-            comments={video.comments}
-            shares={video.shares}
-            url={video.url}
-            profilePic={video.profilePic}
-            setVideoRef={handleVideoRef(index)}
-            autoplay={index === 0}
-          />
-        ))}
-        <BottomNavbar className="bottom-navbar" />
+        {(wellnessBreak) ?
+          <WellnessBreak chat={wellnessActivityIsVideo} setChat={setWellnessActivityIsVideo} elapsedTime={elapsed} length={breakLength} onEnd={() => setWellnessBreak(false)} /> 
+        : (
+          <>
+            <TopNavbar className="top-navbar" />
+            {/* Here we map over the videos array and create VideoCard components */}
+            {videos.map((video, index) => (
+              <VideoCard
+                key={index}
+                username={video.username}
+                description={video.description}
+                song={video.song}
+                likes={video.likes}
+                saves={video.saves}
+                comments={video.comments}
+                shares={video.shares}
+                url={video.url}
+                profilePic={video.profilePic}
+                setVideoRef={handleVideoRef(index)}
+                elapsed={elapsed}
+                setElapsed={setElapsed}
+                autoplay={index === 0}
+              />
+            ))}
+            <BottomNavbar className="bottom-navbar" />
+          </>
+        )}
       </div>
     </div>
   );

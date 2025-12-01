@@ -4,7 +4,7 @@ import FooterRight from './FooterRight';
 import './VideoCard.css';
 
 const VideoCard = (props) => {
-  const { url, username, description, song, likes, shares, comments, saves, profilePic, setVideoRef, autoplay } = props;
+  const { url, username, description, song, likes, shares, comments, saves, profilePic, setVideoRef, autoplay, elapsed, setElapsed } = props;
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -32,17 +32,14 @@ const VideoCard = (props) => {
           setVideoRef(ref);
         }}
         loop
+        muted
         src={url}
       ></video>
       <div className="bottom-controls">
-        <div className="footer-left">
-          {/* The left part of the container */}
-          <FooterLeft username={username} description={description} song={song} />
-        </div>
-        <div className="footer-right">
-          {/* The right part of the container */}
-          <FooterRight likes={likes} shares={shares} comments={comments} saves={saves} profilePic={profilePic} />
-        </div>
+        {/* The left part of the container */}
+        <FooterLeft username={username} description={description} song={song} elapsed={elapsed} setElapsed={setElapsed} />
+        {/* The right part of the container */}
+        <FooterRight likes={likes} shares={shares} comments={comments} saves={saves} profilePic={profilePic} />
       </div>
     </div>
   );
