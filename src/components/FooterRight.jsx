@@ -50,7 +50,7 @@ function FooterRight({ likes, comments, saves, shares, profilePic, onAddReaction
           <img src={profilePic} className='userprofile' alt='Profile' style={{ width: '45px', height: '45px', color: '#616161' }} />
         ) : null}
         {/* The user add icon */}
-        <FontAwesomeIcon icon={userAddIcon} className='useradd' style={{ width: '15px', height: '15px', color: '#FF0000' }} onClick={handleUserAddClick}/>
+        <FontAwesomeIcon icon={userAddIcon} className='useradd' style={{ width: '15px', height: '15px', color: '#FF0000' }} onClick={handleUserAddClick} />
       </div>
       <div className="sidebar-icon">
         {/* The heart icon for liking */}

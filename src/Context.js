@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { parseInterval, formatTimeRemaining } from './utils/time';
 import './Context.css';
 
@@ -20,7 +20,7 @@ const timeLengths = [
     { label: '10 minutes', value: '10m' },
 ];
 
-function Context({moods, wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWellnessBreak, wellnessBreak, selectedInterval, setSelectedInterval, breakLength, setBreakLength, endWellnessBreak}) {
+function Context({ moods, wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWellnessBreak, wellnessBreak, selectedInterval, setSelectedInterval, breakLength, setBreakLength, endWellnessBreak }) {
     const [nextBreakAt, setNextBreakAt] = useState(() => Date.now() + parseInterval(selectedInterval || '10m'));
     const [timeRemaining, setTimeRemaining] = useState(() => parseInterval(selectedInterval || '10m'));
 
@@ -76,31 +76,31 @@ function Context({moods, wellnessActivityIsVideoState, setWellnessActivityIsVide
     }, [isWellnessBreak]);
 
     return (
-    <div className="context">
-        This is a demo of the Wellness Features on TikTok. This UI is only partially functional (sound is muted on purpose).
-        Below you can adjust the Wellness Feature settings:
+        <div className="context">
+            This is a demo of the Wellness Features on TikTok. This UI is only partially functional (sound is muted on purpose).
+            Below you can adjust the Wellness Feature settings:
 
-        <div className="time-interval-setting">
-            <fieldset>
-                <legend>Interval <i>between</i> Wellness Breaks</legend>
+            <div className="time-interval-setting">
+                <fieldset>
+                    <legend>Interval <i>between</i> Wellness Breaks</legend>
 
-                <button onClick={handleForceBreak} disabled={isWellnessBreak}>Force Break Now</button>
+                    <button onClick={handleForceBreak} disabled={isWellnessBreak}>Force Break Now</button>
 
-        {timeIntervals.map((interval) => (
-                    <div key={interval.value}>
-            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} readOnly checked={selectedInterval === interval.value} onClick={() => setSelectedInterval(interval.value)} />
-                        <label htmlFor={`ti-${interval.value}`}>{interval.label}</label>
+                    {timeIntervals.map((interval) => (
+                        <div key={interval.value}>
+                            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} readOnly checked={selectedInterval === interval.value} onClick={() => setSelectedInterval(interval.value)} />
+                            <label htmlFor={`ti-${interval.value}`}>{interval.label}</label>
+                        </div>
+                    ))}
+
+                    <div style={{ marginTop: '8px' }}>
+                        <strong>Next Wellness Break:</strong> {!isWellnessBreak ? new Date(nextBreakAt).toLocaleString() : '...'}
                     </div>
-                ))}
-
-                <div style={{marginTop: '8px'}}>
-                  <strong>Next Wellness Break:</strong> {!isWellnessBreak ? new Date(nextBreakAt).toLocaleString() : '...'}
-                </div>
-                <div>
-                  <strong>Time Remaining:</strong> {!isWellnessBreak ? formatTimeRemaining(timeRemaining) : '...'}
-                </div>
-            </fieldset>
-            <fieldset>
+                    <div>
+                        <strong>Time Remaining:</strong> {!isWellnessBreak ? formatTimeRemaining(timeRemaining) : '...'}
+                    </div>
+                </fieldset>
+                <fieldset>
                     <legend>Length <i>of</i>&nbsp; Wellness Breaks</legend>
 
                     <button onClick={() => endWellnessBreak()} disabled={!isWellnessBreak} >End Break Now</button>
@@ -111,10 +111,10 @@ function Context({moods, wellnessActivityIsVideoState, setWellnessActivityIsVide
                             <label htmlFor={`tl-${interval.value}`}>{interval.label}</label>
                         </div>
                     ))}
-            </fieldset>
-            <fieldset>
+                </fieldset>
+                <fieldset>
                     <legend>Wellness Break Activity</legend>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <div key='video'>
                             <input type="radio" id='rd-video' name='video' readOnly checked={wellnessActivityIsVideoState} onClick={() => setWellnessActivityIsVideo(true)} />
                             <label htmlFor='rd-video'>Wellness Video</label>
@@ -124,13 +124,13 @@ function Context({moods, wellnessActivityIsVideoState, setWellnessActivityIsVide
                             <label htmlFor='rd-chat'>AI Companion</label>
                         </div>
                     </div>
-            </fieldset>
-            <fieldset>
-                <legend>Mood Check Chart</legend>
-                <i>Not implemented yet</i>
-            </fieldset>
+                </fieldset>
+                <fieldset>
+                    <legend>Mood Check Chart</legend>
+                    <i>Not implemented yet</i>
+                </fieldset>
+            </div>
         </div>
-    </div>
-);
+    );
 }
 export default Context;
