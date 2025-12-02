@@ -10,6 +10,24 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
         const [elapsed, setElapsed] = useState(0);
         const startRef = useRef(Date.now());
 
+        const autoplay = true;
+        const videoRef = useRef(null);
+        const videos = [require('../videos/wellness1.mp4')]
+
+        useEffect(() => {
+            if (autoplay) {
+                 videoRef.current.play();
+            }
+        }, [autoplay]);
+
+        const onVideoPress = () => {
+            if (videoRef.current.paused) {
+            videoRef.current.play();
+            } else {
+            videoRef.current.pause();
+            }
+        };
+
         useEffect(() => {
             startRef.current = Date.now();
             setElapsed(0);
@@ -43,7 +61,16 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
                                 <h2>Take a Moment</h2>
                                 <h3>You've been browsing for<br></br>{formatElapsed(elapsedTime)}</h3>
                                 <div className="wellness-video">
-
+                                    <video
+                                        className="wc-player"
+                                        onClick={onVideoPress}
+                                        ref={(ref) => {
+                                            videoRef.current = ref;
+                                        }}
+                                        loop
+                                        muted
+                                        src={videos[0]}
+                                    ></video>
                                 </div>
                                 <small className="hint">Not interested in the video?</small>
                                 <button className="ai-chat-button" onClick={() => setChat(false)}>Chat with AI Wellness Companion Instead</button>

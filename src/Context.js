@@ -24,6 +24,15 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
     const [nextBreakAt, setNextBreakAt] = useState(() => Date.now() + parseInterval(selectedInterval || '10m'));
     const [timeRemaining, setTimeRemaining] = useState(() => parseInterval(selectedInterval || '10m'));
 
+    function handleForceBreak() {
+        wellnessBreak();
+
+        const ms = parseInterval(selectedInterval);
+        const next = Date.now() + ms;
+        setNextBreakAt(next);
+        setTimeRemaining(ms);
+    }
+
     // schedule/update next break whenever selectedInterval changes
     useEffect(() => {
         const ms = parseInterval(selectedInterval || '10m');
@@ -66,18 +75,9 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
         setTimeRemaining(ms);
     }, [isWellnessBreak]);
 
-    function handleForceBreak() {
-        wellnessBreak();
-
-        const ms = parseInterval(selectedInterval);
-        const next = Date.now() + ms;
-        setNextBreakAt(next);
-        setTimeRemaining(ms);
-    }
-
     return (
     <div className="context">
-        This is a demo of the Wellness Features on TikTok. This UI is only partially functional.
+        This is a demo of the Wellness Features on TikTok. This UI is only partially functional (sound is muted on purpose).
         Below you can adjust the Wellness Feature settings:
 
         <div className="time-interval-setting">
@@ -88,7 +88,7 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
 
         {timeIntervals.map((interval) => (
                     <div key={interval.value}>
-            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} checked={selectedInterval == interval.value} onClick={() => setSelectedInterval(interval.value)} />
+            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} checked={selectedInterval === interval.value} onClick={() => setSelectedInterval(interval.value)} />
                         <label htmlFor={`ti-${interval.value}`}>{interval.label}</label>
                     </div>
                 ))}
@@ -107,7 +107,7 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
 
                     {timeLengths.map((interval) => (
                         <div key={interval.value}>
-                            <input type="radio" id={`tl-${interval.value}`} name={`time-length-${interval.value}`} value={interval.value} checked={breakLength == interval.value} onClick={() => setBreakLength(interval.value)} />
+                            <input type="radio" id={`tl-${interval.value}`} name={`time-length-${interval.value}`} value={interval.value} checked={breakLength === interval.value} onClick={() => setBreakLength(interval.value)} />
                             <label htmlFor={`tl-${interval.value}`}>{interval.label}</label>
                         </div>
                     ))}

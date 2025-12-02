@@ -5,9 +5,9 @@ function formatElapsed(seconds, hours = false) {
   const mins = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
 
-  if (hours && hrs > 0) return `${hrs} hour${hrs == 1 ? '' : 's'}`;
-  if (mins > 0) return `${mins} minute${mins == 1 ? '' : 's'}`;
-  return `${secs} second${secs == 1 ? '' : 's'}`;
+  if (hours && hrs > 0) return `${hrs} hour${hrs === 1 ? '' : 's'}`;
+  if (mins > 0) return `${mins} minute${mins === 1 ? '' : 's'}`;
+  return `${secs} second${secs === 1 ? '' : 's'}`;
 }
 
 function parseInterval(value) {
