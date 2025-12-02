@@ -160,27 +160,3 @@ body {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 }
-
-.break {
-  width: 375px;
-}
-
-.flex {
-  place-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-@media (max-width: 1000px) {
-  .break {
-    visibility: hidden;
-    display: none;
-  }
-
-  .flex {
-    gap: 0px;
-  }
-}
