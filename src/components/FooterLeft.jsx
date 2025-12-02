@@ -47,7 +47,7 @@ export default function FooterLeft(props) {
         if (typeof setElapsed === 'function') setElapsed(Math.floor(accRef.current / 1000));
       }
     };
-  }, []);
+  });
 
   return (
     <div className="footer-container">

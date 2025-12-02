@@ -78,15 +78,19 @@ function App() {
     // This function handles the intersection of videos
     const handleIntersection = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const videoElement = entry.target;
-          videoElement.play();
-        } else {
-          const videoElement = entry.target;
-          videoElement.pause();
+        try {
+          if (entry.isIntersecting) {
+            const videoElement = entry.target;
+            videoElement.play();
+          } else {
+            const videoElement = entry.target;
+            videoElement.pause();
+          }
+        } catch (error) {
+          console.error('Error handling intersection', error);
         }
       });
-    };
+    }
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 

@@ -73,7 +73,44 @@ function Context({ moods, wellnessActivityIsVideoState, setWellnessActivityIsVid
         const next = Date.now() + ms;
         setNextBreakAt(next);
         setTimeRemaining(ms);
-    }, [isWellnessBreak]);
+    }, [isWellnessBreak, selectedInterval]);
+
+    // Helpers to compute mood trend for the last 7 days
+    const SCORE_MAP = {
+        Happy: 4,
+        Excited: 4,
+        Love: 4,
+        Laugh: 3,
+        Surprised: 3,
+        Relieved: 3,
+        Thinking: 2,
+        Neutral: 2,
+        Awkward: 1,
+        Tired: 1,
+        Sad: 0,
+        Angry: 0,
+    };
+
+
+    // Build mood data by taking the latest 7 mood checks (no date bucketing)
+    const buildMoodData = () => {
+        const recent = (moods || []).slice(-7);
+        const padCount = Math.max(0, 7 - recent.length);
+        const padded = Array.from({ length: padCount }).map(() => null).concat(recent);
+
+        return padded.map((m, i) => {
+            const avg = m ? (SCORE_MAP[m.label] !== undefined ? SCORE_MAP[m.label] : 2) : null;
+            const emoji = m ? m.emoji || null : null;
+            return {
+                date: null,
+                label: '',
+                avg,
+                emoji,
+            };
+        });
+    };
+
+    const moodPoints = buildMoodData();
 
     return (
         <div className="context">
@@ -126,8 +163,50 @@ function Context({ moods, wellnessActivityIsVideoState, setWellnessActivityIsVid
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Mood Check Chart</legend>
-                    <i>Not implemented yet</i>
+                    <legend>Mood Check Trend</legend>
+                    <div className="mood-chart-container" aria-hidden={false}>
+                        <svg className="mood-chart-svg" viewBox="0 0 340 140" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Mood trend for last 7 days">
+                            {/* background grid lines (subtle) */}
+                            <g className="grid-lines" stroke="#f3f4f6" strokeWidth="1">
+                                <line x1="20" y1="20" x2="320" y2="20" />
+                                <line x1="20" y1="70" x2="320" y2="70" />
+                                <line x1="20" y1="120" x2="320" y2="120" />
+                            </g>
+                            {/* polyline connecting points */}
+                            {
+                                (() => {
+                                    const w = 300; const h = 100; const marginX = 20; const marginY = 20;
+                                    const maxScore = 4;
+                                    const points = moodPoints.map((p, i) => {
+                                        const x = marginX + (i * (w / (moodPoints.length - 1)));
+                                        const value = p.avg === null ? 2 : p.avg;
+                                        const y = marginY + (1 - (value / maxScore)) * h;
+                                        return `${x},${y}`;
+                                    }).join(' ');
+                                    return <polyline fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={points} />;
+                                })()
+                            }
+
+                            {/* points & emojis */}
+                            {
+                                (() => {
+                                    const w = 300; const h = 100; const marginX = 20; const marginY = 20;
+                                    const maxScore = 4;
+                                    return moodPoints.map((p, i) => {
+                                        const x = marginX + (i * (w / (moodPoints.length - 1)));
+                                        const value = p.avg === null ? 2 : p.avg;
+                                        const y = marginY + (1 - (value / maxScore)) * h;
+                                        const emoji = p.emoji || '';
+                                        return (
+                                            <g key={i} className="mood-point">
+                                                <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fontSize="25">{emoji}</text>
+                                            </g>
+                                        );
+                                    });
+                                })()
+                            }
+                        </svg>
+                    </div>
                 </fieldset>
             </div>
         </div>

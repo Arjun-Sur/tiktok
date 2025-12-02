@@ -9,6 +9,31 @@
     margin-top: 15px;
 }
 
+.mood-chart-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 6px 4px 6px;
+}
+
+.mood-chart-svg {
+    margin-right: 12px;
+    height: auto;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    padding: 6px;
+}
+
+.mood-chart-container {
+    width: 100%;
+    text-align: center;
+    color: #374151;
+    margin-right: 10px;
+}
+
+.mood-point text { pointer-events: none; font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif; }
+
 @media (max-width: 1000px) {
     .time-interval-setting {
         margin-top: 15px;
