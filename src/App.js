@@ -56,8 +56,8 @@ const videoUrls = [
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const [wellnessBreak, setWellnessBreak] = useState(false);
-  const [wellnessActivityIsVideo, setWellnessActivityIsVideo] = useState(true);
+  const [wellnessBreak, setWellnessBreak] = useState(true); // false
+  const [wellnessActivityIsVideo, setWellnessActivityIsVideo] = useState(false); // true
   const [selectedInterval, setSelectedInterval] = useState('10m');
   const [breakLength, setBreakLength] = useState('2m');
   const [elapsed, setElapsed] = useState(0);

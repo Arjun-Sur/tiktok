@@ -27,7 +27,8 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
 
         const pct = Math.min(100, (elapsed / totalMs) * 100);
         const remainingMs = Math.max(0, totalMs - elapsed);
-        const remainingText = remainingMs >= 60000 ? `${Math.ceil(remainingMs/60000)}m ${Math.ceil((remainingMs%60000)/1000)}s` : `${Math.ceil(remainingMs/1000)}s`;
+        const totalSeconds = Math.ceil(remainingMs / 1000);
+        const remainingText = totalSeconds < 60 ? `${totalSeconds}s` : `${Math.floor(totalSeconds / 60)}m ${totalSeconds % 60}s`;
 
         return (
             <div className="mood-check-container">
@@ -81,13 +82,15 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
 
                                 <div className="wc-input-row">
                                     <textarea className="wc-textarea" aria-label="how are you feeling" placeholder="Write how you're feeling..." value={''} onChange={() => {}} rows={1} />
-                                    <button className="wc-mic" aria-label="voice input">🎤</button>
+                                    <button className="wc-mic" aria-label="voice input">
+                                        <svg viewBox="0 0 384 512" width="9.75" height="13" fill="#333333"><g><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"></path></g></svg>
+                                    </button>
                                 </div>
                             </div>
                             <small className="hint" style={{marginLeft: '40px', marginRight: '40px'}}>This is AI. Not a substitute for professional help or treatment. Cannot diagnose.</small>
                           </>  
                         )}
-                        <div className="wb-footer" style={{}}>
+                        <div className="wb-footer">
                             <div className="wb-footer-meta">
                                 <small>Break time:</small>
                                 <div className="wb-progress">

@@ -137,9 +137,9 @@
 
 .wc-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 8px 18px 6px 18px;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  padding: 3px 18px 3px 18px;
 }
 .wc-option {
   background: #f3f4f6;
@@ -155,7 +155,7 @@
 .wc-divider {
   text-align: center;
   color: #9ca3af;
-  margin: 8px 0 6px 0;
+  margin: 0px 0 5px 0;
 }
 .wc-divider span {
   background: white;
@@ -167,44 +167,52 @@
   gap: 8px;
   padding: 10px 12px 18px 12px;
   align-items: center;
+  max-height: 20px;
 }
 .wc-textarea {
   flex: 1 1 auto;
-  height: 26px;
+  height: 20px;
   overflow: hidden;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #333333;
+  color: #333333;
+  background-color: #4ade80;
   font-size: 0.95rem;
   resize: none;
 }
 .wc-textarea::-webkit-input-placeholder {
     font-family: "Montserrat", sans-serif;
     font-size: .94rem;
+    color: #333333;
 }
 
 .wc-textarea:-ms-input-placeholder {
     font-family: "Montserrat", sans-serif;
     font-size: .94rem;
+    color: #333333;
 }
 
 .wc-textarea:-moz-placeholder {
     font-family: "Montserrat", sans-serif;
     font-size: .94rem;
+    color: #333333;
 }
 
 .wc-textarea::-moz-placeholder {
     font-family: "Montserrat", sans-serif;
     font-size: .94rem;
+    color: #333333;
 }
 .wc-mic {
   background: #4ade80;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 10px 15px;
   cursor: pointer;
   font-size: 1.1rem;
+  border: 1px solid #333333;
 }
 
 .warning-message {
