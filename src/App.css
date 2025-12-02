@@ -37,7 +37,8 @@ body {
   border-radius: 25px;
   overflow: scroll;
   scroll-snap-type: y mandatory;
-  background-color: #000;
+  background-color: black;
+  overflow-x: hidden;
 }
 
 .container::-webkit-scrollbar {

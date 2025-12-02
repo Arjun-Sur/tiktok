@@ -88,7 +88,7 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
 
         {timeIntervals.map((interval) => (
                     <div key={interval.value}>
-            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} checked={selectedInterval === interval.value} onClick={() => setSelectedInterval(interval.value)} />
+            <input type="radio" id={`ti-${interval.value}`} name="time-interval" value={interval.value} readOnly checked={selectedInterval === interval.value} onClick={() => setSelectedInterval(interval.value)} />
                         <label htmlFor={`ti-${interval.value}`}>{interval.label}</label>
                     </div>
                 ))}
@@ -107,7 +107,7 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
 
                     {timeLengths.map((interval) => (
                         <div key={interval.value}>
-                            <input type="radio" id={`tl-${interval.value}`} name={`time-length-${interval.value}`} value={interval.value} checked={breakLength === interval.value} onClick={() => setBreakLength(interval.value)} />
+                            <input type="radio" id={`tl-${interval.value}`} name={`time-length-${interval.value}`} readOnly value={interval.value} checked={breakLength === interval.value} onClick={() => setBreakLength(interval.value)} />
                             <label htmlFor={`tl-${interval.value}`}>{interval.label}</label>
                         </div>
                     ))}
@@ -116,11 +116,11 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
                     <legend>Wellness Break Activity</legend>
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                         <div key='video'>
-                            <input type="radio" id='rd-video' name='video' checked={wellnessActivityIsVideoState} onClick={() => setWellnessActivityIsVideo(true)} />
+                            <input type="radio" id='rd-video' name='video' readOnly checked={wellnessActivityIsVideoState} onClick={() => setWellnessActivityIsVideo(true)} />
                             <label htmlFor='rd-video'>Wellness Video</label>
                         </div>
                         <div key='chat'>
-                            <input type="radio" id='rd-chat' name='chat' checked={!wellnessActivityIsVideoState} onClick={() => setWellnessActivityIsVideo(false)} />
+                            <input type="radio" id='rd-chat' name='chat' readOnly checked={!wellnessActivityIsVideoState} onClick={() => setWellnessActivityIsVideo(false)} />
                             <label htmlFor='rd-chat'>AI Companion</label>
                         </div>
                     </div>

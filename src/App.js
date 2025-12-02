@@ -61,6 +61,7 @@ function App() {
   const [selectedInterval, setSelectedInterval] = useState('10m');
   const [breakLength, setBreakLength] = useState('2m');
   const [elapsed, setElapsed] = useState(0);
+  const [reactions, setReactions] = useState([]);
   const videoRefs = useRef([]);
 
   useEffect(() => {
@@ -109,6 +110,11 @@ function App() {
     setWellnessBreak(true);
   };
 
+  function handleAddReaction(reaction) {
+    // reaction: { emoji, label, videoIndex, time }
+    setReactions((prev) => [...prev, reaction]);
+  }
+
   return (
     <div className="app">
       <Context wellnessActivityIsVideoState={wellnessActivityIsVideo} setWellnessActivityIsVideo={setWellnessActivityIsVideo} isWellnessBreak={wellnessBreak} wellnessBreak={wellnessBreakFunc} selectedInterval={selectedInterval} setSelectedInterval={setSelectedInterval} breakLength={breakLength} setBreakLength={setBreakLength} endWellnessBreak={() => setWellnessBreak(false)} />
@@ -122,6 +128,7 @@ function App() {
             {videos.map((video, index) => (
               <VideoCard
                 key={index}
+                index={index}
                 username={video.username}
                 description={video.description}
                 song={video.song}
@@ -135,6 +142,7 @@ function App() {
                 elapsed={elapsed}
                 setElapsed={setElapsed}
                 autoplay={index === 0}
+                onAddReaction={handleAddReaction}
               />
             ))}
             <BottomNavbar className="bottom-navbar" />

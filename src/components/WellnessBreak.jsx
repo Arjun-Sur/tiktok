@@ -16,15 +16,23 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
 
         useEffect(() => {
             if (autoplay) {
-                 videoRef.current.play();
+                try {
+                    videoRef.current.play();
+                } catch (error) {
+                    console.error('Error attempting to play', error);
+                }
             }
         }, [autoplay]);
 
         const onVideoPress = () => {
-            if (videoRef.current.paused) {
-            videoRef.current.play();
-            } else {
-            videoRef.current.pause();
+            try {
+                if (videoRef.current.paused) {
+                videoRef.current.play();
+                } else {
+                videoRef.current.pause();
+                }
+            } catch (error) {
+                console.error('Error attempting to interact with video', error);
             }
         };
 

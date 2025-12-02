@@ -1,0 +1,20 @@
+.mood-check {
+    color: #4ade80;
+    background: transparent;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px 4px;
+    color: #4ade80;
+}
+
+.mood-check .mood-label {
+    margin: 0;
+    /* font-size: 11px; */
+    /* color: #fff; */
+    text-align: center;
+}
