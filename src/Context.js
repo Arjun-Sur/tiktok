@@ -20,7 +20,7 @@ const timeLengths = [
     { label: '10 minutes', value: '10m' },
 ];
 
-function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWellnessBreak, wellnessBreak, selectedInterval, setSelectedInterval, breakLength, setBreakLength, endWellnessBreak}) {
+function Context({moods, wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWellnessBreak, wellnessBreak, selectedInterval, setSelectedInterval, breakLength, setBreakLength, endWellnessBreak}) {
     const [nextBreakAt, setNextBreakAt] = useState(() => Date.now() + parseInterval(selectedInterval || '10m'));
     const [timeRemaining, setTimeRemaining] = useState(() => parseInterval(selectedInterval || '10m'));
 
@@ -124,6 +124,10 @@ function Context({wellnessActivityIsVideoState, setWellnessActivityIsVideo, isWe
                             <label htmlFor='rd-chat'>AI Companion</label>
                         </div>
                     </div>
+            </fieldset>
+            <fieldset>
+                <legend>Mood Check Chart</legend>
+                <i>Not implemented yet</i>
             </fieldset>
         </div>
     </div>
