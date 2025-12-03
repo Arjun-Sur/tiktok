@@ -8,7 +8,9 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
 
     const totalMs = parseInterval(length);
     const [elapsed, setElapsed] = useState(0);
-    const startRef = useRef(Date.now());
+    const startRef = useRef(null);
+    const prevTotalRef = useRef(totalMs);
+    const onEndRef = useRef(onEnd);
 
     const autoplay = true;
     const videoRef = useRef(null);
@@ -36,20 +38,32 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
         }
     };
 
+    // keep latest onEnd in a ref so its identity won't reset the timer
     useEffect(() => {
-        startRef.current = Date.now();
-        setElapsed(0);
+        onEndRef.current = onEnd;
+    }, [onEnd]);
+
+    // start the timer; only reset start time when totalMs actually changes
+    useEffect(() => {
+        if (prevTotalRef.current !== totalMs) {
+            startRef.current = Date.now();
+            setElapsed(0);
+            prevTotalRef.current = totalMs;
+        } else if (!startRef.current) {
+            startRef.current = Date.now();
+        }
+
         const interval = setInterval(() => {
             const now = Date.now();
             const e = now - startRef.current;
             setElapsed(e);
             if (e >= totalMs) {
                 clearInterval(interval);
-                onEnd();
+                if (onEndRef.current) onEndRef.current();
             }
         }, 200);
         return () => clearInterval(interval);
-    }, [length, totalMs, onEnd]);
+    }, [totalMs]);
 
     const pct = Math.min(100, (elapsed / totalMs) * 100);
     const remainingMs = Math.max(0, totalMs - elapsed);
