@@ -11,6 +11,7 @@
   pointer-events: none;
   display: flex;
   margin-left: 5px;
+  width: 320px;
 }
 
 .ticker {

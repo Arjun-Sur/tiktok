@@ -28,7 +28,7 @@ To use this TikTok UI Clone, follow these steps:
 A live demo is available at [infotiktok.arjunsur.me](https://infotiktok.arjunsur.me).
 
 # Credits
-The TikTok UI Clone was created by [s-shemmee](https://github.com/s-shemmee).
+The TikTok UI Clone was created by [s-shemmee](https://github.com/s-shemmee). TikToks featured are from the default TikTok For You Page.
 
 # License
 This project is licensed under the MIT license.

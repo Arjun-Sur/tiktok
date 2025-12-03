@@ -12,7 +12,7 @@ function WellnessBreak({ chat, setChat, elapsedTime, length = '2m', onEnd = () =
 
     const autoplay = true;
     const videoRef = useRef(null);
-    const videos = [require('../videos/wellness1.mp4')]
+    const videos = ['https://content.arjunsur.me/infotiktok/wellness1.mp4'];
 
     useEffect(() => {
         if (autoplay && chat) {

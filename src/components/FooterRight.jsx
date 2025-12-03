@@ -85,7 +85,7 @@ function FooterRight({ likes, comments, saves, shares, profilePic, onAddReaction
           />
         )}
         {/* Displaying the number of saves */}
-        <p>{saved ? saves + 1 : saves}</p>
+        <p>{formatLikesCount(parseLikesCount(saves) + (saved ? 1 : 0))}</p>
       </div>
       <div className="sidebar-icon">
         {/* The share icon */}
