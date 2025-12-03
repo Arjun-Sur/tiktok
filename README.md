@@ -25,7 +25,7 @@ To use this TikTok UI Clone, follow these steps:
 - Open your browser and navigate to `http://localhost:3000` to access the app.
 
 # Demo
-A live demo is available at [infotiktok.arjunsur.me](https://infotiktok.arjunsur.me).
+A live demo is available at [infotiktok.arjunsur.me](https://infotiktok.arjunsur.me). A video demo is available at [www.youtube.com/watch?v=xkP_1DJiMXM](https://www.youtube.com/watch?v=xkP_1DJiMXM).
 
 # Credits
 The TikTok UI Clone was created by [s-shemmee](https://github.com/s-shemmee). TikToks featured are from the default TikTok For You Page.
