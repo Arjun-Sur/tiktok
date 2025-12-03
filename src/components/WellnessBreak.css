@@ -122,8 +122,8 @@
 }
 
 .wellness-chat {
-  height: 70%;
-  min-height: fit-content;
+  /* height: 70%;
+  min-height: fit-content; */
   width: 80%;
   background-color: white;
   margin-top: 10px;
